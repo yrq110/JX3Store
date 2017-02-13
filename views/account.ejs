@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<% include head %>
+<body>
+
+<%- include navi %>
+
+<div class="container">
+    <br><br>
+    <div class="row">
+
+        <ul class="collapsible popout" data-collapsible="accordion">
+            <% for (var i=0; i<publish.length; i++) { %>
+            <li>
+                <div class="collapsible-header" id="li-<%= i%>"><i class="material-icons">face</i>
+                    <%= keyword[i]%>
+                </div>
+                <div class="collapsible-body">
+                    <table class="centered striped">
+                        <thead>
+                        <tr>
+                            <td>基本信息</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>价格</td>
+                            <td><%= price[i]%></td>
+                        </tr>
+                        <tr>
+                            <td>发布时间</td>
+                            <td><%= publish[i]%></td>
+                        </tr>
+                        <tr>
+                            <td>服务器</td>
+                            <td><%= server[i]%></td>
+                        </tr>
+                        <tr>
+                            <td>等级</td>
+                            <td><%= level[i]%></td>
+                        </tr>
+                        <tr>
+                            <td>职业</td>
+                            <td><%= job[i]%></td>
+                        </tr>
+                        <tr>
+                            <td>性别</td>
+                            <td>
+                                <% if (sex[i]==true) {%>
+                                女
+                                <% } else {%>
+                                男
+                                <% }%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>体型</td>
+                            <td><%= size[i]%></td>
+                        </tr>
+                        <tr>
+                            <td>坐骑</td>
+                            <td><%= horse[i]%></td>
+                        </tr>
+                        <tr>
+                            <td>成就</td>
+                            <td><%= achievement[i]%></td>
+                        </tr>
+                        <tr>
+                            <td>状态</td>
+                            <td>
+                                <% if (status[i]==true) {%>
+                                未售
+                                <% } else {%>
+                                已售
+                                <% }%>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="centered striped">
+                        <thead>
+                        <tr>
+                            <td>图片信息</td>
+                        </tr>
+                        </thead>
+                    </table>
+                    <p>角色</p>
+                    <div class="container">
+                        <div class="row">
+                            <% for (var j=0; j<picture[i]['character'].length; j++) {%>
+                            <div class="col s4" style="margin:20px 0">
+                                <img class="materialboxed" width="200" src="images/clothes/<%= picture[i]['character'][j]%>">
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <p>时装</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s4" style="margin:20px 0">
+                                <img class="materialboxed" width="200" src="images/clothes/shishui.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <p>背包</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s4" style="margin:20px 0">
+                                <img class="materialboxed" width="200" src="images/clothes/shishui.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <p>装备</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s4" style="margin:20px 0">
+                                <img class="materialboxed" width="200" src="images/clothes/shishui.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <p>武学声望</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s4" style="margin:20px 0">
+                                <img class="materialboxed" width="200" src="images/clothes/shishui.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <p>其他</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s4" style="margin:20px 0">
+                                <img class="materialboxed" width="200" src="images/clothes/shishui.jpg">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="btn-large red waves-light waves-effect right" id="buy-btn"
+                         style="font-weight: bold; font-size: 30px; margin-right: 50px;"
+                    >买买买</div>
+                    <p></p>
+                </div>
+            </li>
+            <%}%>
+        </ul>
+
+
+    </div>
+
+</div>
+
+<%- include footer %>
+
+<script type="text/javascript">
+
+    $('.materialboxed').materialbox();
+
+    $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+        $('.collapsible').collapsible();
+    });
+    var expand = false;
+    var current_li = 0;
+    $('.collapsible-header').click(function (self) {
+        if (expand === false) {
+
+            var e = $(self.target).attr("id");
+            current_li = e.split('-')[1];
+            window.scrollTo(0,100+current_li*20);
+                    expand = true
+            console.log(e + 'expand' );
+
+        }else{
+            if (current_li == $(self.target).attr("id").split('-')[1]){
+                expand = false;
+                console.log('shrink')
+            }else{
+                var e = $(self.target).attr("id");
+                current_li = e.split('-')[1];
+                window.scrollTo(0,100+current_li*20);
+                expand = true
+                console.log(e + 'expand' );
+            }
+        }
+    })
+
+    $('#account-tab').attr('class','active');
+</script>
+</body>
+</html>

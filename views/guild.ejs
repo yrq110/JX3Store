@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<% include head %>
+<!--<style type="text/css">-->
+    <!--td #de {-->
+        <!--overflow:hidden;-->
+        <!--white-space:nowrap;-->
+        <!--text-overflow:ellipsis;-->
+    <!--}-->
+<!--</style>-->
+<body>
+
+    <%- include navi %>
+
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="input-field col s6 l2">
+                <select id="union">
+                    <option value="" disabled selected>选择阵营</option>
+                    <option value="中立">中立</option>
+                    <option value="浩气盟">浩气盟</option>
+                    <option value="恶人谷">恶人谷</option>
+                </select>
+                <label>阵营</label>
+            </div>
+
+            <div class="input-field col s6 l2">
+                <select id="level">
+                    <option value="" disabled selected>选择等级</option>
+                    <% for (var i=1; i<8; i++) {%>
+                        <option value="<%= i%>"><%= i%></option>
+                    <% } %>
+                </select>
+                <label>等级</label>
+            </div>
+
+            <div class="input-field col s6 l2">
+                <select id="main_tree">
+                    <option value="" disabled selected>选择主干</option>
+                    <option value="招贤纳士">招贤纳士</option>
+                    <option value="锦天绣地">锦天绣地</option>
+                    <option value="年年有余">年年有余</option>
+                    <option value="步步生莲">步步生莲</option>
+                    <option value="鸢飞鱼跃">鸢飞鱼跃</option>
+                    <option value="春华秋实">春华秋实</option>
+                    <option value="奇珍异宝">奇珍异宝</option>
+                    <option value="欣欣向荣">欣欣向荣</option>
+                </select>
+                <label>天工树·主干</label>
+            </div>
+
+            <div class="input-field col s6 l2">
+                <select id="weekly_tree">
+                    <option value="" disabled selected>选择涅槃</option>
+                    <option value="百废俱兴">百废俱兴</option>
+                    <option value="一念千里">一念千里</option>
+                    <option value="镖头">镖头</option>
+                    <option value="宝地">宝地</option>
+                </select>
+                <label>天工树·涅槃</label>
+            </div>
+
+            <div class="input-field col s5 l2">
+                <select id="price">
+                    <option value="" disabled selected>选择区间</option>
+                    <option value="0-500">0~500</option>
+                    <option value="500-1000">500~1000</option>
+                    <option value="1000-10000">1000~</option>
+                </select>
+                <label>价格区间</label>
+            </div>
+
+            <div class="input-field col s4 l1">
+                <select id="status">
+                    <option value="" disabled selected>状态</option>
+                    <option value="true">未售</option>
+                    <option value="false">已售</option>
+                </select>
+                <label>状态</label>
+            </div>
+
+            <div id='search-btn' class="red btn-large waves-effect waves-light col s3 l1"
+                 style="font-family:'Microsoft YaHei'; font-weight: bold; font-size: 20px;">筛选</div>
+        </div>
+    </div>
+
+    <div class="container" id="small-guild-table" style="display:none">
+        <ul class="collection" style="border-width: 10px">
+            <% for (var i=0; i<name.length; i++) { %>
+            <li class="collection-item" style="border-width: 10px">
+                <span class="title" style="font-size: 150%"><%=name[i]%></span><span class="badge new"
+                                                                                     data-badge-caption="级"><%=level[i]%></span>
+                <!--<span class="badge red" data-badge-caption="2">3</span>-->
+                <br>
+                <!--<p class="chip blue white-text">浩气盟</p>-->
+                <% if (union[i]=='浩气盟') {%>
+                <p class="chip blue white-text"><%= union[i]%></p>
+                <% } else {%>
+                <p class="chip red white-text"><%= union[i]%></p>
+                <% } %>
+
+                <p class="chip orange white-text"><%= price[i]%></p>
+
+                <% if (status[i]==true) {%>
+                <p class="chip blue white-text">未售</p>
+                <% } else {%>
+                <p class="chip orange white-text">已售</p>
+                <% }%>
+
+                <a class="waves-effect waves-light btn modal-trigger blue" href="#modal<%= i%>">详情</a>
+            </li>
+            <% } %>
+        </ul>
+        <div class="btn orange waves-light waves-effect left modal-trigger" href="#tree-introduce">天工树说明</div>
+        <div class="btn red waves-light waves-effect right modal-trigger" id="buy-btn" href="#modal-buy">买买买</div>
+    </div>
+
+    <div class="row" id="large-guild-table" style="display:none; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;">
+        <div class="col s1"></div>
+        <div class="col s10">
+            <table class="bordered highlight centered">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>阵营</th>
+                    <th>等级</th>
+                    <th>建设/资金</th>
+                    <th>主干</th>
+                    <th>涅槃</th>
+                    <th>价格(元)</th>
+                    <th>状态</th>
+                    <th>详情</th>
+                    <!--<th class="center">相中</th>-->
+                </tr>
+                </thead>
+
+                <tbody>
+                <% for (var i=0; i<name.length; i++) {%>
+                <tr>
+                    <td><%= name[i]%></td>
+                    <% if (union[i]=='浩气盟') {%>
+                    <td><div class="chip blue white-text"><%= union[i]%></div></td>
+                    <% } else {%>
+                    <td><div class="chip orange white-text"><%= union[i]%></div></td>
+                    <% } %>
+                    <td><%= level[i]%></td>
+                    <td><%= construct[i]%>/<%= fund[i]%></td>
+                    <td>
+                        <% var n = false; %>
+                        <% for (var j=0; j<main_tree[i].length; j++) { %>
+                        <% if (j<3) {%>
+                        <div class="chip blue darken-2 white-text"><%= main_tree[i][j]%></div>
+                        <% } else if (n==false) {%>
+                        <div class="chip blue darken-2 white-text">等</div>
+                        <% n=true%>
+                        <% } %>
+                        <% } %>
+                    </td>
+                    <td>
+                        <% var n = false; %>
+                        <% for (var j=0; j<weekly_tree[i].length; j++) { %>
+                        <% if (j<3) {%>
+                        <div class="chip blue darken-2 white-text"><%= weekly_tree[i][j]%></div>
+                        <% } else if (n==false) {%>
+                        <div class="chip blue darken-2 white-text">等</div>
+                        <% n=true%>
+                        <% } %>
+                        <% } %>
+                    </td>
+
+                    <td><%= price[i]%></td>
+
+                    <td>
+                        <% if (status[i]==true) {%>
+                        未售
+                        <% } else {%>
+                        已售
+                        <% }%>
+                    </td>
+                    <td><a  class="waves-effect waves-light btn modal-trigger blue"
+                                           href="#modal<%= i%>">查看</a></td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+            <br>
+            <div class="btn-large orange waves-light waves-effect left modal-trigger"
+                 href="#tree-introduce" style="font-weight: bold; font-size: 20px;">天工树说明</div>
+            <div class="btn-large red waves-light waves-effect right modal-trigger" id="buy-btn" href="#modal-buy"
+                 style="font-weight: bold; font-size: 30px;"
+            >买买买</div>
+        </div>
+    </div>
+
+    <% for (var i=0; i<name.length; i++) {%>
+    <div id="modal<%= i%>" class="modal">
+        <div class="modal-content">
+            <h4 class="center"><%= name[i]%></h4>
+            <div class="container">
+                <div class="row">
+                    <% for (var j=0; j<picture[i].length; j++) {%>
+
+                    <img class="materialboxed" data-caption="A picture" width="500"
+                         src="images/guilds/guild-<%= no[i]%>/<%= picture[i][j]%>" style="margin:30px 0">
+                    <% }%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+    <div id="tree-introduce" class="modal">
+        <div class="modal-content">
+            <!--<div class="container">-->
+            <nav>
+                <div class="nav-wrapper green">
+                    <a class="brand-logo center">天工树</a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a id="main-tree-btn">主干</a></li>
+                        <li><a id="weekly-tree-btn">涅槃</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <table id="main-tree-content" class="centered striped">
+                <thead>
+                <tr>
+                    <th data-field="name">名称</th>
+                    <th data-field="name">节点效果</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr class="no-wrap">
+                    <td>招贤纳士</td>
+                    <td>1/2/3重：提升帮会可招收帮众上限至150/200/250人</td>
+                </tr>
+                <tr>
+                    <td>封官拜将</td>
+                    <td>1/2/3重：帮会组织结构层增加至10/14/16个</td>
+                </tr>
+                <tr>
+                    <td>年年有余</td>
+                    <td>1/2/3重：帮会仓库上限增加到4/6/8个</td>
+                </tr>
+                <tr>
+                    <td>步步生莲</td>
+                    <td>1/2/3重：帮会花盆商处出售普通/1.5倍/2倍产量的花盆</td>
+                </tr>
+                <tr>
+                    <td>锦天绣地</td>
+                    <td>1重：帮会家园土地打开五级土地上限</td>
+                </tr>
+                <tr>
+                    <td>鸢飞鱼跃</td>
+                    <td>1重：钓鱼活动增产50%并有几率钓出[素银宝箱]和[鎏金宝箱]</td>
+                </tr>
+                <tr>
+                    <td>春华秋实</td>
+                    <td>1重：菜地和花盆可种植一至四级草料</td>
+                </tr>
+                <tr>
+                    <td>奇珍异宝</td>
+                    <td>1重：开启帮会宝物商店与兵鉴迷篇商店</td>
+                </tr>
+                <tr>
+                    <td>欣欣向荣</td>
+                    <td>1重：提高帮会菜地最低收成数到40%</td>
+                </tr>
+                <tr>
+                    <td>阵营铁卫</td>
+                    <td>1重：阵营日常和攻防战任务的威望值和战阶积分奖励提高20%</td>
+                </tr>
+                <tr>
+                    <td>积少成多</td>
+                    <td>1重：帮会95级以下的高经验随机日常增加至四个</td>
+                </tr>
+                <tr>
+                    <td>周而复始</td>
+                    <td>1重：亲传弟子每周为师父发送礼物时自身额外获得2000点修为，2000点江湖贡献值，2000点威望，200点侠义值</td>
+                </tr>
+                <tr>
+                    <td>多彩多色</td>
+                    <td>1/2/3重：增加三个帮会匾额样式</td>
+                </tr>
+                <tr>
+                    <td>吃遍天下</td>
+                    <td>1/2/3重：帮会食堂烹饪产出增加[鸡肉菜盘]和[美酒佳酿]/[南瓜蛊菜盘]和[蒸鱼菜盘]/[肘子菜盘]</td>
+                </tr>
+                <tr>
+                    <td>美轮美奂</td>
+                    <td>1/2/3重：增加帮会旗帜</td>
+                </tr>
+                <tr>
+                    <td>物美价廉</td>
+                    <td>1重：帮众成员打包帮会食物个数增加至二个</td>
+                </tr>
+                <tr>
+                    <td>仙人指路</td>
+                    <td>1/2/3重：开启帮会祈愿台，允许每周和韩非子对话获得[瑰石]一块/三块/五块</td>
+                </tr>
+                <tr>
+                    <td>大庇寒士</td>
+                    <td>1重：开启帮会资金修理装备：修理装备花费的50%将由帮会资金支出</td>
+                </tr>
+                <tr>
+                    <td>万卷真经</td>
+                    <td>1重：开启帮会书童售卖指定书籍</td>
+                </tr>
+                <tr>
+                    <td>洗髓伐脉</td>
+                    <td>1重：在生活技艺训练师处遗忘专精消耗减少50%</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table id="weekly-tree-content" class="centered striped" style="display:none">
+                <thead>
+                <tr>
+                    <th data-field="name">名称</th>
+                    <th data-field="name">节点效果</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>百废俱兴</td>
+                    <td>1重：帮会内活动收益提高100%。帮会内小猪快跑、菜园保卫战收益加成</td>
+                </tr>
+                <tr>
+                    <td>一念千里</td>
+                    <td>1重：帮会成员神行千里调息时间降低十五分钟</td>
+                </tr>
+                <tr>
+                    <td>妙境通幽</td>
+                    <td>1重：95级团队秘境中同帮会帮众数量占70%及以上则秘境中数据奖励提高100%</td>
+                </tr>
+                <tr>
+                    <td>甘霖</td>
+                    <td>1重：据点贸易任务奖励的载具物资增加100%</td>
+                </tr>
+                <tr>
+                    <td>简材</td>
+                    <td>1重：生产载具消耗降低20%，可用金币额外购买两种神机车</td>
+                </tr>
+                <tr>
+                    <td>神工</td>
+                    <td>1重：箭塔照明弹的作用范围和持续时间增加100%</td>
+                </tr>
+                <tr>
+                    <td>鬼斧</td>
+                    <td>1重：载具攻击力提高10%</td>
+                </tr>
+                <tr>
+                    <td>神速</td>
+                    <td>1重：神机车移动速度提高三分之二</td>
+                </tr>
+                <tr>
+                    <td>摧城</td>
+                    <td>1重：载具对载具和城墙伤害提高100%</td>
+                </tr>
+                <tr>
+                    <td>坚韧</td>
+                    <td>1重：神机车和摧城车防御提高20%</td>
+                </tr>
+                <tr>
+                    <td>利器</td>
+                    <td>1重：载具攻击对玩家伤害提升50%</td>
+                </tr>
+                <tr>
+                    <td>镖头</td>
+                    <td>1重：帮会成员进行据点贸易时可骑乘坐骑</td>
+                </tr>
+                <tr>
+                    <td>宝地</td>
+                    <td>1重：据点贸易任务奖励的帮会资金增加20%</td>
+                </tr>
+                <tr>
+                    <td>拾遗</td>
+                    <td>1重：失去据点时，额外返还已积累的30%战功牌</td>
+                </tr>
+                <tr>
+                    <td>死斗</td>
+                    <td>1重：据店内帮会成员攻击力和内外功防御提高50%</td>
+                </tr>
+                <tr>
+                    <td>将星</td>
+                    <td>1重：据点内持旗帮会成员最大气血值和御劲等级提高200%</td>
+                </tr>
+                <tr>
+                    <td>超拔</td>
+                    <td>1重：据点所有建筑受到伤害减少20%</td>
+                </tr>
+                <tr>
+                    <td>驰援</td>
+                    <td>1重：据点内弓箭手和近战守卫伤害提高20%</td>
+                </tr>
+                </tbody>
+            </table>
+            <!--</div>-->
+        </div>
+    </div>
+
+
+
+    <br><br>
+
+    <%- include footer %>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $('select').material_select();
+
+            $('.modal-trigger').leanModal();
+
+            $('#search-btn').click(function () {
+
+                var string = '/query?level=' + $('#level').val() + '&' + 'union=' + $('#union').val() + '&' + 'price=' + $('#price').val() + '&' + 'status=' + $('#status').val() + '&' + 'main_tree=' + $('#main_tree').val() + '&' + 'weekly_tree=' + $('#weekly_tree').val();
+                location.href = string;
+                console.log(string);
+            })
+
+            $('#main-tree-btn').click(function () {
+
+                $('#main-tree-content').show();
+                $('#weekly-tree-content').hide();
+
+            })
+
+            $('#weekly-tree-btn').click(function () {
+                $('#weekly-tree-content').show();
+                $('#main-tree-content').hide();
+            })
+
+            if (screen.width < 480) {
+                $('#large-guild-table').css('display','none');
+                $('#small-guild-table').css('display','inline');
+            }else{
+                $('#large-guild-table').css('display','inline');
+                $('#small-guild-table').css('display','none');
+            }
+
+            $('#guild-tab').attr('class','active');
+
+        });
+
+//        禁止选中文本
+//        if(document.all){
+//            document.onselectstart= function(){return false;}; //for ie
+//        }else{
+//            document.onmousedown= function(){return false;};
+//            document.onmouseup= function(){return true;};
+//        }
+//        document.onselectstart = new Function('event.returnValue=false;');
+    </script>
+</body>
+</html>

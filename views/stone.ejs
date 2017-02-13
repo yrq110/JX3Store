@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<% include head %>
+<body>
+    <%- include navi %>
+    <div class="container">
+        <div class="row">
+            <br>
+            <p></p>
+
+            <ul class="collapsible popout" data-collapsible="accordion expandable">
+                <li>
+                    <div class="collapsible-header active"><i class="material-icons">filter_6</i>六级五行石</div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            <a href="#!" class="collection-item">价格: #</a>
+                            <a href="#!" class="collection-item">总量: #</a>
+                            <a href="#!" class="collection-item">余量: #</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header active"><i class="material-icons">filter_7</i>七级五行石</div>
+                    <div class="collapsible-body">
+                        <table class="bordered highlight centered">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>每组数目</th>
+                                <th>价格</th>
+                                <th>余量</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>方案一</td>
+                                <td>1块七级(绑定)</td>
+                                <td>6800</td>
+                                <td>6</td>
+                            </tr>
+
+                            <tr>
+                                <td>方案二</td>
+                                <td>1块七级(绑定)+2块六级(绑定)</td>
+                                <td>7700</td>
+                                <td>238</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </li>
+            </ul>
+
+            <div class="btn-large red waves-light waves-effect right modal-trigger" id="buy-btn" href="#modal-buy" style="font-weight: bold; font-size: 30px;"
+            >买买买</div>
+        </div>
+    </div>
+
+    <%- include footer %>
+
+    <script type="text/javascript">
+        var options = [
+            {selector: '#staggered-test', offset: 50, callback: function(el) {
+                Materialize.toast("This is our ScrollFire Demo!", 1500 );
+            } },
+            {selector: '#staggered-test', offset: 205, callback: function(el) {
+                Materialize.toast("Please continue scrolling!", 1500 );
+            } },
+            {selector: '#staggered-test', offset: 400, callback: function(el) {
+                Materialize.showStaggeredList($(el));
+            } },
+            {selector: '#image-test', offset: 500, callback: function(el) {
+                Materialize.fadeInImage($(el));
+            } }
+        ];
+        Materialize.scrollFire(options);
+
+        $('#stone-tab').attr('class','active');
+    </script>
+</body>
+</html>

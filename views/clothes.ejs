@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<% include head %>
+<body>
+
+    <%- include navi %>
+
+    <div class="container">
+
+        <div class="row">
+            <% for (var i=0; i<clothes.length; i++) {%>
+            <div class="col s12 m12 l3">
+                <div class="card sticky-action large">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="<%= clothesPic[i]%>">
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4"><%= clothes[i]%>
+                    </span>
+                        <p></p>
+                        <div class="chip light-blue white-text">成衣</div>
+                        <div class="chip light-green white-text">全体型</div>
+                        <div class="chip red white-text">限量</div>
+                        <div class="chip orange white-text">五周年</div>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">我是标题<i class="material-icons
+                        right">close</i></span>
+                        <p>我是内容</p>
+                    </div>
+                    <br>
+                    <div class="card-action">
+                        <a href="#">我是链接</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+
+        <div class="btn-large red waves-light waves-effect right" id="buy-btn" style="font-weight: bold; font-size: 30px;"
+        >买买买</div>
+        <br><br>
+    </div>
+
+    <%- include footer %>
+
+    <script type="text/javascript">
+        $('#clothes-tab').attr('class','active');
+    </script>
+
+</body>
+</html>

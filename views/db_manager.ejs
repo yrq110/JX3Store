@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>拍卖行</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="stylesheets/materialize.min.css"  media="screen,projection"/>
+</head>
+
+<body><head>
+    <title>拍卖行</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="stylesheets/materialize.min.css"  media="screen,projection"/>
+</head>
+
+<body>
+
+    <%- include navi %>
+
+    <br><br>
+
+    <img class=" center materialboxed" src="https://www.google
+    .com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a id="add" href="#test1" class="active">录入</a></li>
+                    <li class="tab col s3"><a id="scan" href="#test2">浏览</a></li>
+                    <li class="tab col s3"><a id="edit" href="#test3">修改</a></li>
+                    <li class="tab col s3"><a id="copy" href="#test4">备份</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="content-1">
+            <div class="row">
+                <div class="col s2"></div>
+                <div class="col s8 center-align">
+                    <ul class="tabs center">
+                        <li class="tab col s3"><a id="guild-add" class="active" href="#guild">帮会</a></li>
+                        <li class="tab col s3"><a id="stones-add" href="#stones">五行石</a></li>
+                        <li class="tab col s3"><a id="clothes-add"href="#stones">外观</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row" id="content-2">
+
+                <div class="center">
+                    <p class=" center btn waves-effect waves-light red lighten-1" id="generate">生成</p>
+                    <p class=" center btn waves-effect waves-light red lighten-1" id="save">保存</p>
+                </div>
+                <form class="col s12" id="new_guild_form">
+
+                    <div class="row">
+
+                        <div class="input-field col s4">
+                            <input id="name" type="text" class="validate" placeholder="请输入名称">
+                            <label for="name">1.名称</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <select id="union">
+                                <option value="" disabled selected>选择阵营</option>
+                                <option value="中立">中立</option>
+                                <option value="恶人谷">恶人谷</option>
+                                <option value="浩气盟">浩气盟</option>
+                            </select>
+                            <label>2.阵营</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <select id="level">
+                                <option value="" disabled selected>选择等级</option>
+                                <% for (var i=1; i<8; i++) {%>
+                                <option value="<%= i %>"><%= i %></option>
+                                <% } %>
+                            </select>
+                            <label>3.等级</label>
+                        </div>
+
+                        <div class="col s2"></div>
+
+                        <div class="input-field col s4">
+                            <input id="construct" type="text" class="validate" placeholder="请输入建设进度">
+                            <label for="construct">4.建设</label>
+                        </div>
+
+
+                        <div class="input-field col s4">
+                            <input id="fund" type="text" class="validate" placeholder="请输入帮会资金">
+                            <label for="fund">5.资金</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <select multiple id="main_tree">
+                                <option value="" disabled selected>请选择天工树·主干</option>
+                                <option value="人数上限200/250">人数上限200/250</option>
+                                <option value="四仓库">四仓库</option>
+                                <option value="五级菜地">五级菜地</option>
+                                <option value="钓鱼宝箱">钓鱼宝箱</option>
+                                <option value="1-4级草料">1-4级草料</option>
+                                <option value="收成提高40%">收成提高40%</option>
+                                <option value="宝物商人">宝物商人</option>
+                            </select>
+                            <label>6.主干</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <select multiple id="weekly_tree">
+                                <option value="" disabled selected>请选择天工树·涅槃</option>
+                                <option value="双倍帮会活动奖励">双倍帮会活动奖励</option>
+                                <option value="15神行">15神行</option>
+                                <option value="骑马跑商">骑马跑商</option>
+                                <option value="其它">其它</option>
+                            </select>
+                            <label>7.涅槃</label>
+                        </div>
+
+                        <div class="col s3"></div>
+                        <div class="input-field col s6">
+                            <input id="price" type="text" class="validate" placeholder="请输入出售价格">
+                            <label for="price">8.价格(元)</label>
+                        </div>
+
+                        <div class="col s10" id="pic">
+                            <label for="picture">9.图片</label>
+                            <input id="picture" type="text" class="validate" placeholder="请输入图片地址">
+                            <p class="btn waves-effect waves-light light-blue lighten-1" id="add_pic">添加</p>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="javascripts/materialize.min.js"></script>
+
+    <script type="text/javascript" src="javascripts/mongo.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            var pic_array = [];
+
+            $('select').material_select();
+
+            $('.materialboxed').materialbox();
+
+            $('#add_pic').click(function () {
+                var pic_addr = $('#picture').val();
+
+                pic_array.push(pic_addr);
+
+                $('#pic').append('<img onload="if (this.width>140) { this.width=140;}" class="materialboxed" src="' +
+                        pic_addr + '">' );
+                console.log('pic :' + pic_array);
+            })
+
+            $('#generate').click(function () {
+
+                console.log('name:' + $('#name').val());
+                console.log('union:' + $('#union').val());
+                console.log('level:' + $('#level').val());
+                console.log('construct:' + $('#construct').val());
+                console.log('fund:' + $('#fund').val());
+                console.log('main_tree:' + $('#main_tree').val());
+                console.log('weekly_tree:' + $('#weekly_tree').val());
+                console.log('price:' + $('#price').val());
+                console.log('picture:' + pic_array);
+
+            })
+
+            $('#save').click(function () {
+
+                var guild = new Guild({
+                    name : $('#name').val(),
+                    union : $('#union').val(),
+                    level : $('#level').val(),
+                    construct: $('#construct').val(),
+                    fund : $('#fund').val(),
+                    main_tree : $('#main_tree').val(),
+                    weekly_tree : $('#weekly_tree').val(),
+                    status : true,
+                    price : $('#price').val(),
+                    picture : pic_array
+                });
+                guild.save();
+
+            })
+//            $('#add').click(function () {
+//                $('#content-1').empty().load('add.html');
+//            });
+//
+//            $('#scan').click(function () {
+//                $('#content-1').empty().append('<p>scan</p>');
+//            });
+//
+//            $('#edit').click(function () {
+//                $('#content-1').empty().append('<p>edit</p>');
+//            });
+//
+//            $('#copy').click(function () {
+//                $('#content-1').empty().append('<p>copy</p>');
+//            });
+//
+//            $('#guild-add').click(function () {
+////                $('#content').empty().append('<p>hello</p>');
+//                $('#content-2').empty().load('hello.html');
+//
+//                return true;
+//            });
+//
+//            $('#stones-add').click(function () {
+//
+//                $('#content-2').empty().append('<p>stones</p>');
+//                return true;
+//            });
+//
+//            $('#clothes-add').click(function () {
+//
+//                $('#content-2').empty().append('<p>clothes</p>');
+//                return true;
+//            });
+
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+
+
+<div class="right">
+    <div class="fixed-action-btn horizontal click-to-toggle">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+            <!--<li><a class="btn-floating red" id="statistic-btn"><i class="material-icons">insert_chart</i></a></li>-->
+            <!--<li><a class="btn-floating yellow darken-1" id="message-btn"><i-->
+                            <!--class="material-icons">format_quote</i></a></li>-->
+            <li><a class="btn-floating green" id="move-top-btn"><i class="material-icons">publish</i></a></li>
+            <li><a class="btn-floating blue" id="star-btn"><i class="material-icons">star</i></a></li>
+        </ul>
+    </div>
+</div>
+
+<footer class="page-footer orange">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 l6">
+                <h5 class="white-text">买进卖出原本千秋业</h5>
+                <p class="grey-text text-lighten-4">均为一口价,请勿还价</p>
+            </div>
+            <div class="col l3 hide-on-small-only">
+                <h5 class="white-text">官网</h5>
+                <ul>
+                    <li><a class="white-text" href="http://jx3.xoyo.com/" target="_blank">剑网三</a></li>
+                </ul>
+            </div>
+            <div class="col l3 hide-on-small-only">
+                <h5 class="white-text">贴吧</h5>
+                <ul>
+                    <li><a class="white-text" href="http://tieba.baidu.com/f?kw=%BD%A3%CD%F83&fr=ala0&tpl=5" target="_blank"
+                        >剑网三主吧</a></li>
+                    <li><a class="white-text" href="http://tieba.baidu
+                    .com/f?ie=utf-8&kw=%E5%BF%B5%E7%A0%B4&fr=search" target="_blank">念破吧</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="s12">
+            Made by <a class="white-text text-lighten-3" href="https://github.com/yrq110/">yrq110</a>
+
+            <span class="hide-on-small-only">Powered by <a class="white-text text-lighten-3" href="https://nodejs.org/"
+                                   target="_blank">Node</a>
+                and <a
+                    class="white-text
+            text-lighten-3" href="http://materializecss.com/" target="_blank">Materialize</a>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260527082'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260527082%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            </span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="modal-buy" class="modal">
+    <div class="modal-content">
+        <ul class="collapsible" data-collapsible="expandable">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">face</i>如何联系</div>
+                <div class="collapsible-body">
+                    <table class="centered striped">
+                        <tbody>
+                        <tr>
+                            <td>QQ</td>
+                            <td>你猜</td>
+                        </tr>
+                        <tr>
+                            <td>YY</td>
+                            <td>你猜</td>
+                        </tr>
+                        <tr>
+                            <td>游戏</td>
+                            <td>网通三区->念奴娇/破阵子/行云流水->@辣条供应商</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">gavel</i>支付方式</div>
+                <div class="collapsible-body">
+                    <table class="centered striped">
+                        <tbody>
+                        <tr>
+                            <td>用爱</td>
+                            <td>帮会</td>
+                        </tr>
+                        <tr>
+                            <td>用心</td>
+                            <td>五行石</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">favorite</i>注意事项</div>
+                <div class="collapsible-body">
+                    <table class="centered striped">
+                        <tbody>
+                        <tr>
+                            <td>没什么要注意的</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="javascripts/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    $(".button-collapse").sideNav();
+
+    $('.modal-trigger').leanModal();
+
+    $('#statistic-btn').click(function () {
+        console.log('statistic-btn');
+
+    })
+
+    $('#message-btn').click(function () {
+        console.log('message-btn');
+
+    })
+
+//    回到顶部
+    $('#move-top-btn').click(function () {
+        console.log('move-top-btn');
+        window.scrollTo(0,0);
+    })
+
+//    收藏站点
+    $('#star-btn').click(function () {
+        if (window.sidebar && window.sidebar.addPanel) { // Mozilla Firefox Bookmark
+            window.sidebar.addPanel(document.title, window.location.href, '');
+        } else if (window.external && ('AddFavorite' in window.external)) { // IE Favorite
+            window.external.AddFavorite(location.href, document.title);
+        } else if (window.opera && window.print) { // Opera Hotlist
+            this.title = document.title;
+            return true;
+        } else { // webkit - safari/chrome
+            alert('浏览器暂不支持, 请按 ' + (navigator.userAgent.toLowerCase().indexOf('mac') != -1 ?
+                            'Command/Cmd' :
+                            'CTRL') + ' + D ' +' 收藏本站');
+        }
+    })
+
+
+
+</script>

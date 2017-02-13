@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<% include head %>
+  <body>
+
+    <%- include navi %>
+
+    <div class="container">
+        <br><br>
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="images/guilds/guild-1/guild1-1.jpg">
+                    <div class="caption center-align">
+                        <h3>帮会</h3>
+                        <h5 class="light grey-text text-lighten-3">各种级别、阵营的帮会</h5>
+                        <br><br><br><br>
+                        <div id="guild-btn" class="btn-large blue waves-effect
+                        waves-light">查看详情</div>
+                    </div>
+                    <div class="caption left-align">
+
+                    </div>
+                </li>
+                <li>
+                    <img src="images/clothes/shishui.jpg">
+                    <div class="caption left-align">
+                        <h3>外观</h3>
+                        <h5 class="light grey-text text-lighten-3">各种装绑限量成衣、红发</h5>
+                        <br><br><br><br>
+                        <div id="clothes-btn" class="btn-large blue waves-effect
+                        waves-light">查看详情</div>
+                    </div>
+                    <div class="caption left-align">
+
+                    </div>
+                </li>
+                <li>
+                    <img src="images/stones/stone.jpg">
+                    <div class="caption right-align">
+                        <h3>五行石</h3>
+                        <h5 class="light grey-text text-lighten-3">各种级别的五行石</h5>
+                        <br><br><br><br>
+                        <div id="stone-btn" class="btn-large blue waves-effect
+                        waves-light">查看详情</div>
+                    </div>
+                    <div class="caption left-align">
+
+                    </div>
+                </li>
+                <li>
+                    <img src="images/accounts/account.jpg">
+                    <div class="caption center-align">
+                        <h3>账号</h3>
+                        <h5 class="light grey-text text-lighten-3">各种游戏账号</h5>
+                        <br><br><br><br>
+                        <div id="account-btn" class="btn-large blue waves-effect
+                        waves-light">查看详情</div>
+                    </div>
+                    <div class="caption left-align">
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <br><br>
+    <%- include footer %>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.slider').slider({full_width: true});
+
+            $('#guild-btn').click(function () {
+                location.href = "/guild";
+            });
+            $('#clothes-btn').click(function () {
+                location.href = "/clothes";
+            });
+            $('#stone-btn').click(function () {
+                location.href = "/stone";
+            });
+            $('#account-btn').click(function () {
+                location.href = "/account";
+            });
+
+        });
+    </script>
+  </body>
+</html>
