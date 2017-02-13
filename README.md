@@ -29,7 +29,6 @@ web入门所写的第一个小应用，网游虚拟物品商店。
 * mongoose
 * mongodb
 
-
 ## 构建
 
 1. 安装依赖
@@ -43,6 +42,14 @@ web入门所写的第一个小应用，网游虚拟物品商店。
   node bin/www  
   # server at http://127.0.0.1:3000
   ```
+
+
+## 数据库
+在routes/index.js文件中:
+```javascript
+mongoose.connect('mongodb://YOUR_DB');
+```
+将YOUR_DB改为你的mongodb数据库的地址。
 
 ## 证书
 

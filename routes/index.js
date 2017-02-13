@@ -5,7 +5,7 @@ var model = require('../models/goods_model');
 var Clothes = model.Clothes;
 var Guild = model.Guild;
 var Account = model.Account;
-mongoose.connect('mongodb://yrq110:room506@ds041536.mlab.com:41536/ah_db');
+mongoose.connect('mongodb://YOUR_DB');
 
 
 // router.get('/db', function (req, res) {
@@ -80,7 +80,7 @@ router.get('/guild', function (req, res) {
         // console.log(guilds[0].name + guilds[0].level);
         res.render('guild', { name: _name, union: _union, level: _level, construct:_construct, fund:_fund, main_tree: _main_tree, weekly_tree: _weekly_tree, status: _status, price: _price, picture: _picture, no:_no});
     })
-    
+
     // res.render('guild');
 });
 
